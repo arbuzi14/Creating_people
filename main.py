@@ -2,7 +2,6 @@ import file_operations
 import os
 from faker import Faker
 import random
-import shutil
 
 
 LETTERS_MAPPING = {
@@ -76,6 +75,7 @@ LETTERS_MAPPING = {
 }
 NUMBER_PEOPLE = int(input("сколько надо карточек "))
 
+
 def create_character():
     fake = Faker("ru_RU")
     skills = [
@@ -91,11 +91,7 @@ def create_character():
         "Огненный заряд",
         "Ледяной выстрел"
     ]
-    if not os.path.exists("characters"):
-        pass
-    else:
-        shutil.rmtree("characters")
-    os.mkdir("characters")
+    os.makedirs("characters", exist_ok=True)
     for skill_number in range(len(skills)):
         skills[skill_number] = "".join(LETTERS_MAPPING.get(letter) for letter in skills[skill_number])
     for i in range(NUMBER_PEOPLE):
